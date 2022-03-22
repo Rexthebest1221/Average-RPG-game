@@ -18,11 +18,14 @@ int main()
     int bigfrogDamage = 2;
     int bigfrogHealth = 20;
     int cobraDamage = 5;
+    int shrekHealth = 150;
+    int shrekDamage = 20;
     int healPower;
     int dice;
     int choice;
     int xp;
     int i;
+    
     srand(time(NULL));
     //start of game
     cout<<"---Welcome to the average RPG game---";
@@ -96,6 +99,7 @@ int main()
                             cout<<endl<<"You have killed the frog";
                             cout<<endl<<"The frog has given you 45 xp";
                             xp = xp + 45;
+                            cout<<"You now have "<<xp<<" xp";
                             break;
                             //end of frog death
                         }else{
@@ -134,9 +138,26 @@ int main()
             //end of swamp choice 1
         }else if(choice == 2){
             cout<<endl<<"Your max HP is "<<maxHp<<endl<<"Your damage is "<<userDamage<<endl<<"Your heal power is "<<healPower<<endl;
+            cout<<endl<<endl;
+            
             //end of swamp choice 2
-        }
-        break;
+        }else if(choice == 3){
+            cout<<endl<<endl<<"Shrek Appears!";
+            cout<<endl<<"Get out of my Swamp!";
+            cout<<endl<<"Shreks stats are: "<<shrekHealth<<" HP and "<<shrekDamage<<" damage";
+            cout<<endl<<endl;
+            cout<<"Would you like to:";
+            cout<<endl<<"1. Attack"<<endl<<"2. Heal (Current heal power is "<<healPower<<" )";
+            cout<<endl<<"3. Leave game (No running allowed)";
+            cin>>choice;
+            if(choice == 1);
+            //Finish this :|
+        }else if(choice == 4){
+        cout<<endl<<"You have healed"<<endl;
+        hp = maxHp;
+        cout<<"Your HP is now "<<hp<<endl<<endl;
+        //end of choice 4
+    }
     }//swamp area end
     
     
