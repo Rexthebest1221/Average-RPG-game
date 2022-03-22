@@ -16,11 +16,12 @@ int main()
     int alligatorDamage = 10;
     int alligatorHealth = 40;
     int bigfrogDamage = 2;
-    int bigfrogHealth = 10;
+    int bigfrogHealth = 20;
     int cobraDamage = 5;
     int healPower;
     int dice;
     int choice;
+    int xp;
     int i;
     srand(time(NULL));
     //start of game
@@ -58,7 +59,7 @@ int main()
     userDamage = userDamage + 5;
     maxHp = maxHp + 5;
     healPower = 5;
-    hp = 20;
+    hp = maxHp;
     cout<<endl<<endl;
     while(true){
         string monsters [3] = {"Big Frog", "Cobra", "Alligator"};
@@ -70,21 +71,39 @@ int main()
         cout<<endl<<"5. Leave game"<<endl<<endl;
         cin>>choice;
         if(choice == 1){
-            dice = rand()%3 + 1;
+            dice = rand()%1 + 1;
             if(dice == 1){
-                while(true){
+                
                 for (int i = 0; bigfrogHealth >= 0; i = i + 1 ){
                 cout<<"A wild "<<monsters[0]<<" appears!";
                 cout<<endl<<"The "<<monsters[0]<<" has the following stats";
-                cout<<endl<<bigfrogHealth<<" HP and "<<bigfrogDamage<<"damage";
+                cout<<endl<<bigfrogHealth<<" HP and "<<bigfrogDamage<<" damage";
                 cout<<endl;
-                cout<<"Will you"<<endl<<"1. Attack (Current damage is "<<userDamage;
+                cout<<"Will you"<<endl<<"1. Attack (Current damage is "<<userDamage<<" )";
                 cout<<endl<<"2. Heal "<<healPower<<" HP";
-                cout<<endl<<"3. Run away";
+                cout<<endl<<"3. Run away"<<endl;
+                cin>>choice;
                 if(choice == 1){
                     cout<<endl<<endl<<"You attack the Frog";
                     bigfrogHealth = bigfrogHealth - userDamage;
-                    break;
+                    cout<<endl<<"The frog attacks back! "<<endl<<"He deals "<<bigfrogDamage<<" damage";
+                    hp = hp - bigfrogDamage;
+                    cout<<endl<<endl<<"Would you like to"<<endl<<endl<<"1. Attack again"<<endl<<"2. Heal"<<endl<<"3. Run away";
+                    cin>>choice;
+                    if(choice == 1){
+                        cout<<"You attack the frog";
+                        if(bigfrogHealth < 0){
+                            cout<<endl<<"You have killed the frog";
+                            cout<<endl<<"The frog has given you 45 xp";
+                            xp = xp + 45;
+                            break;
+                            //end of frog death
+                        }else{
+                            cout<<endl<<"The frog has "<<bigfrogHealth<<" left";
+                            //end of somehow not killing the frog when attacking
+                        }
+                        //end of choice 1
+                    }
                     //end of choice 1 for swamp frog combat
                 }else if(choice == 2){
                     if(hp < maxHp){
@@ -94,17 +113,15 @@ int main()
                             hp = maxHp;
                         }
                     }else{
-                        cout<<"You can't heal BOZO";
+                        cout<<"You can't heal BOZO"<<endl<<endl;
                     }
-                    break;
                     //end of choice 2
                 }else if(choice == 3){
                     cout<<"You run away";
-                    break;
                     //end of choice 3
                 }
-                }
-                }//end of while for dice 1
+                }break;
+                //end of while for dice 1
                 
                 //end of dice 1 for swamp
             }else if (dice == 2){
