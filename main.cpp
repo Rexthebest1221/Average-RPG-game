@@ -78,10 +78,10 @@ int main()
         cout<<endl<<"6. Leave game"<<endl<<endl;
         cin>>choice;
         if(choice == 1){
-            dice = rand()%2 + 1;
             bigfrogHealth = 25;
             cobraHealth == 35;
             alligatorHealth = 50;
+            dice = rand()%2 + 1;
             if(dice == 1){
                 while(bigfrogHealth > 0){
                 cout<<"A wild "<<monsters[0]<<" appears!";
@@ -96,12 +96,22 @@ int main()
                 if(choice == 1){
                     cout<<endl<<endl<<"You attack the Frog";
                     bigfrogHealth = bigfrogHealth - userDamage;
+                    if(bigfrogHealth <= 0){
+                            cout<<endl<<endl<<"You have killed the frog";
+                            cout<<endl<<"The frog has given you 45 xp";
+                            xp = xp + 45;
+                            cout<<endl<<"You now have "<<xp<<" xp"<<endl<<endl;
+                            break;
+                            //end of frog death
+                        }else if (bigfrogHealth >= 1){
+                            cout<<endl<<"The frog has "<<bigfrogHealth<<" left";
+                            //end of somehow not killing the frog when attacking
+                        }
                     cout<<endl<<"The frog attacks back! "<<endl<<"He deals "<<bigfrogDamage<<" damage";
                     hp = hp - bigfrogDamage;
                     cout<<endl<<endl<<"Would you like to"<<endl<<endl<<"1. Attack again"<<endl<<"2. Heal (Don't use this it's broken)"<<endl<<"3. Run away"<<endl;
-                    cin>>secondChoice;
-                    if(secondChoice == 1){
-                        cout<<"You attack the frog";
+                    cin>>choice;
+                    bigfrogHealth = bigfrogHealth - userDamage;
                         if(bigfrogHealth <= 0){
                             cout<<endl<<endl<<"You have killed the frog";
                             cout<<endl<<"The frog has given you 45 xp";
@@ -114,7 +124,6 @@ int main()
                             //end of somehow not killing the frog when attacking
                         }
                         //end of choice 1
-                    }
                     //end of choice 1 for swamp frog combat
                 }else if(choice == 2){
                     if(hp < maxHp){
@@ -151,54 +160,25 @@ int main()
                     if(choice == 1){
                         cout<<endl<<endl<<"You attack the Cobra";
                         cobraHealth = cobraHealth - userDamage;
-                        cout<<endl<<"The cobra attacks back!";
-                        cout<<endl<<"He deals "<<cobraDamage<<" damage";
-                        hp = hp - cobraDamage;
-                        cout<<endl<<endl<<"Would you like to"<<endl<<endl<<"1. Attack again"<<endl<<"2. Heal (Don't use this it's broken)"<<endl<<"3. Run away"<<endl;
-                        cin>>secondChoice;
-                        if(secondChoice == 1){
-                            cout<<"You attack the Cobra";
-                            if(cobraHealth <= 0){
+                        if(cobraHealth <= 0){
                                 cout<<endl<<endl<<"You have killed the Cobra";
                                 cout<<endl<<"The cobra has given you 105 xp";
                                 xp = xp + 105;
                                 cout<<endl<<"You now have "<<xp<<" xp"<<endl<<endl;
                                 break;
-                            }else if (cobraHealth >= 1){
-                                cout<<endl<<"The cobra has "<<cobraHealth<<" left";
-                                cout<<endl<<endl<<"Would you like to"<<endl<<endl<<"1. Attack again"<<endl<<"2. Heal (Don't use this it's broken)"<<endl<<"3. Run away"<<endl;
-                                cin>>thirdChoice;
-                                if(thirdChoice == 1){
-                                    cout<<"You attack the cobra";
-                                    if(cobraHealth <= 0 ){
-                                        cout<<endl<<endl<<"You have killed the cobra";
-                                        cout<<endl<<"The cobra has given you 105 xp";
-                                        xp = xp + 105;
-                                        cout<<endl<<"You now have "<<xp<< " xp"<<endl<<endl;
-                                        break;
-                                    }else if(cobraHealth >= 1){
-                                        cout<<endl<<"The cobra has "<<cobraHealth<<" left";
-                                    }
-                                }else if(thirdChoice == 2){
-                                    if(hp < maxHp){
-                                        cout<<"You heal for "<<healPower<<" HP";
-                                        hp = hp + healPower;
-                                        if(hp > maxHp){
-                                            hp = maxHp;
-                                        }
-                                    }else if(hp >= maxHp){
-                                        cout<<"You can't heal BOZO"<<endl<<endl;
-                                    }
-                                }else if(thirdChoice == 3){
-                                    cout<<"You run away";
-                                    break;
-                                }
-                            }break;
-                        }else if(secondChoice == 2){
-                            cout<<"You heal for "<<healPower<<" HP";
-                        }else if(secondChoice == 3){
-                            cout<<"You run away";
-                            break;
+                        }
+                        cout<<endl<<"The cobra attacks back!";
+                        cout<<endl<<"He deals "<<cobraDamage<<" damage";
+                        hp = hp - cobraDamage;
+                        cout<<endl<<endl<<"Would you like to"<<endl<<endl<<"1. Attack again"<<endl<<"2. Heal (Don't use this it's broken)"<<endl<<"3. Run away"<<endl;
+                        cin>>choice;
+                        cobraHealth = cobraHealth - userDamage;
+                        if(cobraHealth <= 0){
+                                cout<<endl<<endl<<"You have killed the Cobra";
+                                cout<<endl<<"The cobra has given you 105 xp";
+                                xp = xp + 105;
+                                cout<<endl<<"You now have "<<xp<<" xp"<<endl<<endl;
+                                break;
                         }
                     }else if(choice == 2){
                         if(hp < maxHp){
@@ -224,7 +204,7 @@ int main()
             }
             //end of swamp choice 1
         }else if(choice == 2){
-            cout<<endl<<"Your max HP is "<<maxHp<<endl<<"Your damage is "<<userDamage<<endl<<"Your heal power is "<<healPower<<endl<<"Your XP is "<<xp<<endl;
+            cout<<endl<<"Your max HP is "<<maxHp<<" Current HP is"<<hp<<endl<<"Your damage is "<<userDamage<<endl<<"Your heal power is "<<healPower<<endl<<"Your XP is "<<xp<<endl;
             cout<<endl<<endl;
             
             //end of swamp choice 2
