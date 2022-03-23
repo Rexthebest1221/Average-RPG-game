@@ -12,18 +12,20 @@ int main()
     string monsters;
     int maxHp = 20;
     int hp = maxHp;
-    int userDamage = 10;
+    int userDamage = 15;
     int alligatorDamage = 10;
-    int alligatorHealth = 40;
-    int bigfrogDamage = 2;
+    int alligatorHealth = 50;
+    const int bigfrogDamage = 2;
     int bigfrogHealth = 20;
     int cobraDamage = 5;
+    int cobraHealth = 35;
     int shrekHealth = 150;
     int shrekDamage = 20;
-    int healPower;
+    int healPower = 5;
     int dice;
     int choice;
-    int xp;
+    int secondChoice; //This is so dumb why I need this
+    int xp = 0;
     int i;
     
     srand(time(NULL));
@@ -69,15 +71,15 @@ int main()
         cout<<"What would you like to do?";
         cout<<endl<<endl<<"1. Explore the swamp (Fight monsters :) )";
         cout<<endl<<"2. Check your stats (Current stats in the game are heal power, hp, and damage)";
-        cout<<endl<<"3. Fight the boss (Recommend damage is ~50 and health is ~ 75)";
+        cout<<endl<<"3. Fight the boss (Recommend damage is ~50 and health is ~ 75, also as of now does not die)";
         cout<<endl<<"4. Rest (Heal)";
-        cout<<endl<<"5. Leave game"<<endl<<endl;
+        cout<<endl<<"5. Upgrade your stats";
+        cout<<endl<<"6. Leave game"<<endl<<endl;
         cin>>choice;
         if(choice == 1){
             dice = rand()%1 + 1;
             if(dice == 1){
-                
-                for (int i = 0; bigfrogHealth >= 0; i = i + 1 ){
+                while(bigfrogHealth > 0){
                 cout<<"A wild "<<monsters[0]<<" appears!";
                 cout<<endl<<"The "<<monsters[0]<<" has the following stats";
                 cout<<endl<<bigfrogHealth<<" HP and "<<bigfrogDamage<<" damage";
@@ -86,23 +88,24 @@ int main()
                 cout<<endl<<"2. Heal "<<healPower<<" HP";
                 cout<<endl<<"3. Run away"<<endl;
                 cin>>choice;
+                while(bigfrogHealth > 0){
                 if(choice == 1){
                     cout<<endl<<endl<<"You attack the Frog";
                     bigfrogHealth = bigfrogHealth - userDamage;
                     cout<<endl<<"The frog attacks back! "<<endl<<"He deals "<<bigfrogDamage<<" damage";
                     hp = hp - bigfrogDamage;
-                    cout<<endl<<endl<<"Would you like to"<<endl<<endl<<"1. Attack again"<<endl<<"2. Heal"<<endl<<"3. Run away";
-                    cin>>choice;
-                    if(choice == 1){
+                    cout<<endl<<endl<<"Would you like to"<<endl<<endl<<"1. Attack again"<<endl<<"2. Heal (Don't use this it's broken)"<<endl<<"3. Run away"<<endl;
+                    cin>>secondChoice;
+                    if(secondChoice == 1){
                         cout<<"You attack the frog";
-                        if(bigfrogHealth < 0){
-                            cout<<endl<<"You have killed the frog";
+                        if(bigfrogHealth <= 0){
+                            cout<<endl<<endl<<"You have killed the frog";
                             cout<<endl<<"The frog has given you 45 xp";
                             xp = xp + 45;
-                            cout<<"You now have "<<xp<<" xp";
+                            cout<<endl<<"You now have "<<xp<<" xp"<<endl<<endl;
                             break;
                             //end of frog death
-                        }else{
+                        }else if (bigfrogHealth >= 1){
                             cout<<endl<<"The frog has "<<bigfrogHealth<<" left";
                             //end of somehow not killing the frog when attacking
                         }
@@ -116,8 +119,9 @@ int main()
                         if(hp > maxHp){
                             hp = maxHp;
                         }
-                    }else{
+                    }else if(hp >= maxHp){
                         cout<<"You can't heal BOZO"<<endl<<endl;
+                        break;
                     }
                     //end of choice 2
                 }else if(choice == 3){
@@ -125,6 +129,7 @@ int main()
                     //end of choice 3
                 }
                 }break;
+                }//I don't know where to put this but I don't care
                 //end of while for dice 1
                 
                 //end of dice 1 for swamp
@@ -137,7 +142,7 @@ int main()
             }
             //end of swamp choice 1
         }else if(choice == 2){
-            cout<<endl<<"Your max HP is "<<maxHp<<endl<<"Your damage is "<<userDamage<<endl<<"Your heal power is "<<healPower<<endl;
+            cout<<endl<<"Your max HP is "<<maxHp<<endl<<"Your damage is "<<userDamage<<endl<<"Your heal power is "<<healPower<<endl<<"Your XP is "<<xp<<endl;
             cout<<endl<<endl;
             
             //end of swamp choice 2
@@ -147,17 +152,14 @@ int main()
             cout<<endl<<"Shreks stats are: "<<shrekHealth<<" HP and "<<shrekDamage<<" damage";
             cout<<endl<<endl;
             while(true){
-                
-            
             cout<<"Would you like to:";
             cout<<endl<<"1. Attack"<<endl<<"2. Heal (Current heal power is "<<healPower<<" )";
-            cout<<endl<<"3. Leave game (No running allowed)";
+            cout<<endl<<"3. Leave game (No running allowed)"<<endl;
             cin>>choice;
-            
-            if(choice == 1);{
+            if(choice == 1){
                 cout<<"You have attacked Shrek! "<<endl;
             }else if(choice == 2){
-                if(hp > maxHp){
+                if(hp >= maxHp){
                     cout<<"You can't heal, you're already at max health"<<endl<<endl;
                 }else{
                     hp = hp + healPower;
@@ -168,10 +170,43 @@ int main()
             }
             }//end of while for Shrek    
         }else if(choice == 4){
-        cout<<endl<<"You have healed"<<endl;
-        hp = maxHp;
-        cout<<"Your HP is now "<<hp<<endl<<endl;
-        //end of choice 4
+        if(hp < maxHp){
+            cout<<endl<<"You have healed"<<endl;
+            hp = maxHp;
+            cout<<"Your HP is now "<<hp<<endl<<endl;
+            //end of choice 4
+        }else{
+            cout<<"You're at max health dummy"<<endl<<endl;
+        }
+    }else if(choice == 5){
+        if(xp < 50){
+            cout<<endl<<"You cannot upgrade your stats. Sorry :("<<endl;
+        }else{
+            cout<<endl<<"Upgrade possiblities";
+            cout<<endl<<"1. + 10 Health";
+            cout<<endl<<"2. + 5 Damage";
+            cout<<endl<<"3. + 10 Heal Power"<<endl;
+            cin>>secondChoice;
+            if(secondChoice == 1){
+                maxHp = maxHp + 10;
+                cout<<"You have upgraded your Health. Your health is now "<<maxHp<<"."<<endl;
+                xp = xp - 50;
+                //skill tree first choice end
+            }else if(secondChoice == 2){
+                userDamage = userDamage + 5;
+                cout<<"Your damage is now "<<userDamage<<endl;
+                xp = xp - 50;
+                //skill tree second Choice end
+            }else if(secondChoice == 3){
+                healPower = healPower + 10;
+                cout<<"Your heal Power is now "<<healPower<<endl;
+                xp = xp - 50;
+                //skill tree third choice
+            }
+        }
+        //end of "skill tree"
+    }else if(choice == 6){
+        return 0;
     }
     }//swamp area end
     
