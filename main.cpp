@@ -146,12 +146,27 @@ int main()
             cout<<endl<<"Get out of my Swamp!";
             cout<<endl<<"Shreks stats are: "<<shrekHealth<<" HP and "<<shrekDamage<<" damage";
             cout<<endl<<endl;
+            while(true){
+                
+            
             cout<<"Would you like to:";
             cout<<endl<<"1. Attack"<<endl<<"2. Heal (Current heal power is "<<healPower<<" )";
             cout<<endl<<"3. Leave game (No running allowed)";
             cin>>choice;
-            if(choice == 1);
-            //Finish this :|
+            
+            if(choice == 1);{
+                cout<<"You have attacked Shrek! "<<endl;
+            }else if(choice == 2){
+                if(hp > maxHp){
+                    cout<<"You can't heal, you're already at max health"<<endl<<endl;
+                }else{
+                    hp = hp + healPower;
+                    cout<<"You have healed! You are now at "<<hp<<" health!"<<endl<<endl;
+                }
+            }else if(choice == 3){
+                return 0;
+            }
+            }//end of while for Shrek    
         }else if(choice == 4){
         cout<<endl<<"You have healed"<<endl;
         hp = maxHp;
