@@ -109,6 +109,10 @@ int main()
                         }
                     cout<<endl<<"The frog attacks back! "<<endl<<"He deals "<<bigfrogDamage<<" damage";
                     hp = hp - bigfrogDamage;
+                    if(hp <= 0){
+                        cout<<endl<<"You Died";
+                        return 0;
+                    }
                     cout<<endl<<endl<<"Would you like to"<<endl<<endl<<"1. Attack again"<<endl<<"2. Heal (Don't use this it's broken)"<<endl<<"3. Run away"<<endl;
                     cin>>choice;
                     bigfrogHealth = bigfrogHealth - userDamage;
@@ -138,7 +142,8 @@ int main()
                     }
                     //end of choice 2
                 }else if(choice == 3){
-                    cout<<"You run away";
+                    cout<<"You run away"<<endl<<endl;
+                    break;
                     //end of choice 3
                 }
                 }break;
@@ -173,6 +178,10 @@ int main()
                         cout<<endl<<endl<<"Would you like to"<<endl<<endl<<"1. Attack again"<<endl<<"2. Heal (Don't use this it's broken)"<<endl<<"3. Run away"<<endl;
                         cin>>choice;
                         cobraHealth = cobraHealth - userDamage;
+                        if(hp <= 0){
+                            cout<<endl<<"You died";
+                            return 0;
+                        }
                         if(cobraHealth <= 0){
                                 cout<<endl<<endl<<"You have killed the Cobra";
                                 cout<<endl<<"The cobra has given you 105 xp";
@@ -191,7 +200,7 @@ int main()
                             cout<<"You can't heal BOZO"<<endl<<endl;
                     }
                     }else if(choice == 3){
-                        cout<<"You run away";
+                        cout<<"You run away"<<endl<<endl;
                         break;
                     }
                 }break;
@@ -220,6 +229,21 @@ int main()
             cin>>choice;
             if(choice == 1){
                 cout<<"You have attacked Shrek! "<<endl;
+                shrekHealth = shrekHealth - userDamage;
+                if(shrekHealth >= 1){
+                    cout<<endl<<"Shrek attacks back!";
+                    hp = hp - shrekDamage;
+                    if(hp <= 0){
+                        cout<<endl<<endl<<"You have died";
+                        return 0;
+                    }
+                }else if(shrekHealth <= 0){
+                    cout<<endl<<"You have killed Shrek!";
+                    cout<<endl<<"You have won the game";
+                    return 0;
+                }
+                
+                
             }else if(choice == 2){
                 if(hp >= maxHp){
                     cout<<"You can't heal, you're already at max health"<<endl<<endl;
